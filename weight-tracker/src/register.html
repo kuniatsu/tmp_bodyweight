@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>新規登録 — WeightTracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen" style="min-width:1440px;">
+  <div class="min-h-screen flex items-center justify-center py-12" x-data="{
+    username: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
+    loading: false,
+    errors: {},
+    validate() {
+      this.errors = {};
+      if (!this.username) this.errors.username = 'ユーザー名を入力してください';
+      if (!this.email) this.errors.email = 'メールアドレスを入力してください';
+      if (!this.password) this.errors.password = 'パスワードを入力してください';
+      if (!this.passwordConfirm) {
+        this.errors.passwordConfirm = 'パスワード（確認）を入力してください';
+      } else if (this.password !== this.passwordConfirm) {
+        this.errors.passwordConfirm = 'パスワードが一致しません';
+      }
+      return Object.keys(this.errors).length === 0;
+    },
+    async submit() {
+      if (!this.validate()) return;
+      this.loading = true;
+      await new Promise(r => setTimeout(r, 2000));
+      window.location.href = 'login.html';
+    }
+  }">
+    <div class="w-full max-w-md px-8 py-10 bg-white rounded-2xl shadow-xl">
+      <!-- ロゴ -->
+      <div class="flex justify-center mb-6">
+        <span class="text-2xl font-bold text-indigo-600">⚖️ WeightTracker</span>
+      </div>
+
+      <!-- 見出し -->
+      <h1 class="text-3xl font-bold text-gray-900 text-center mb-8">新規登録</h1>
+
+      <form @submit.prevent="submit" novalidate>
+        <!-- ユーザー名 -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1" for="username">ユーザー名</label>
+          <input
+            id="username"
+            type="text"
+            x-model="username"
+            placeholder="田中 太郎"
+            class="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+            :class="errors.username ? 'border-red-400' : 'border-gray-300'"
+          >
+          <p x-show="errors.username" x-text="errors.username" class="mt-1 text-sm text-red-500"></p>
+        </div>
+
+        <!-- メールアドレス -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1" for="email">メールアドレス</label>
+          <input
+            id="email"
+            type="email"
+            x-model="email"
+            placeholder="you@example.com"
+            class="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+            :class="errors.email ? 'border-red-400' : 'border-gray-300'"
+          >
+          <p x-show="errors.email" x-text="errors.email" class="mt-1 text-sm text-red-500"></p>
+        </div>
+
+        <!-- パスワード -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1" for="password">パスワード</label>
+          <input
+            id="password"
+            type="password"
+            x-model="password"
+            placeholder="••••••••"
+            class="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+            :class="errors.password ? 'border-red-400' : 'border-gray-300'"
+          >
+          <p x-show="errors.password" x-text="errors.password" class="mt-1 text-sm text-red-500"></p>
+        </div>
+
+        <!-- パスワード確認 -->
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-gray-700 mb-1" for="password-confirm">パスワード（確認）</label>
+          <input
+            id="password-confirm"
+            type="password"
+            x-model="passwordConfirm"
+            placeholder="••••••••"
+            class="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+            :class="errors.passwordConfirm ? 'border-red-400' : 'border-gray-300'"
+          >
+          <p x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" class="mt-1 text-sm text-red-500"></p>
+        </div>
+
+        <!-- アカウント作成ボタン -->
+        <button
+          type="submit"
+          :disabled="loading"
+          class="w-full py-3 rounded-xl text-white font-semibold transition-all duration-200 hover:opacity-90 active:scale-95 disabled:opacity-70"
+          style="background-color: #10B981;"
+        >
+          <span x-text="loading ? '登録中...' : 'アカウント作成'"></span>
+        </button>
+      </form>
+
+      <!-- ログインリンク -->
+      <p class="text-center text-sm text-gray-500 mt-6">
+        すでにアカウントをお持ちの方は
+        <a href="login.html" class="text-indigo-600 font-medium hover:underline">ログインはこちら</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
