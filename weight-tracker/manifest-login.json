@@ -2,6 +2,6 @@
   "name": "WeightTracker Import - Login",
   "id": "weight-tracker-import-login",
   "api": "1.0.0",
-  "main": "figma-import-login.js",
+  "main": "figma-import-plugin.js",
   "editorType": ["figma", "dev"]
 }
