@@ -1,0 +1,7 @@
+{
+  "name": "WeightTracker Import - MyPage",
+  "id": "weight-tracker-import-mypage",
+  "api": "1.0.0",
+  "main": "figma-import-mypage.js",
+  "editorType": ["figma", "dev"]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "WeightTracker Import - Register",
+  "id": "weight-tracker-import-register",
+  "api": "1.0.0",
+  "main": "figma-import-register.js",
+  "editorType": ["figma", "dev"]
+}
